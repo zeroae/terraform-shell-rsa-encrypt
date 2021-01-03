@@ -1,5 +1,5 @@
 module "encrypt" {
-  source = "matti/resource/shell"
+  source  = "matti/resource/shell"
   version = "1.1.0"
   environment = {
     PUBLIC_KEY_PEM = var.public_key_pem
