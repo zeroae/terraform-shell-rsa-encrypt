@@ -80,7 +80,7 @@ Here's how to invoke this example module in your projects
 
 ```hcl
 module "encrypt" {
-  source = "zeroae/shell/rsa-encrypt"
+  source = "zeroae/rsa-encrypt/shell"
 
   public_key_pem = file("path/to/public-key.pem")
   content_base64 = filebase64("path/to/sensitive.txt")
