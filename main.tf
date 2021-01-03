@@ -1,13 +1,18 @@
-resource "random_integer" "example" {
-  count = module.this.enabled ? 1 : 0
-
-  min = 1
-  max = 50000
-  keepers = {
-    example = var.example
+module "encrypt" {
+  source = "matti/resource/shell"
+  version = "1.1.0"
+  environment = {
+    PUBLIC_KEY_PEM = var.public_key_pem
   }
+  sensitive_environment = {
+    CONTENT_B64 = var.content_base64
+  }
+  # https://gist.github.com/thinkerbot/706137
+  command = <<-EOF
+    public_key_pem_file=$(mktemp)
+    printenv PUBLIC_KEY_PEM > $public_key_pem_file
+    printenv CONTENT_B64 | base64 -d | openssl rsautl -encrypt -pubin -inkey $public_key_pem_file | base64 --wrap=0
+    rm -f $public_key_file
+  EOF
 }
 
-locals {
-  example = format("%v %v", var.example, join("", random_integer.example[*].result))
-}
