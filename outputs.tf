@@ -1,4 +1,4 @@
 output "result" {
-  description = "Encrypted content in Base64-encoded format."
+  description = "The base64-encoded encrypted content."
   value       = [module.encrypt.stdout][module.encrypt.exitstatus]
 }

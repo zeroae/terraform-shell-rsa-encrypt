@@ -1,6 +1,6 @@
 variable "algorithm" {
   type        = string
-  description = "The OpenSSL algorithm to use, RSA or SMIME."
+  description = "The algorithm to use, RSA or SMIME."
   default     = "RSA"
   validation {
     condition     = contains(["RSA", "SMIME"], var.algorithm)
