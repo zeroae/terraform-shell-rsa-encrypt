@@ -21,7 +21,7 @@ module "encrypt" {
   command = <<-EOF
     public_key_pem_file=$(mktemp)
     printenv PUBLIC_KEY_PEM > $public_key_pem_file
-    printenv CONTENT_B64 | base64 -d | openssl ${local.openssl_command[var.algorithm]} | base64 --wrap=0
+    printenv CONTENT_B64 | base64 -d | openssl ${local.openssl_command[var.algorithm]} | base64
     rm -f $public_key_file
   EOF
 }
