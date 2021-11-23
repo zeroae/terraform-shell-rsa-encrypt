@@ -9,6 +9,7 @@ resource "random_password" "this" {
 output "generated" {
   description = "The random generated password."
   value       = random_password.this.result
+  sensitive   = true
 }
 
 module "encrypt" {
@@ -42,6 +43,7 @@ module "smime-encrypt" {
 output "decrypted" {
   description = "The same random password after it was encrypted and then decrypted."
   value       = rsadecrypt(module.encrypt.result, tls_private_key.this.private_key_pem)
+  sensitive   = true
 }
 
 output "smime_der_b64" {
